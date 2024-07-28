@@ -7,8 +7,10 @@ float X_PID_V_value(float measure, float calcu);
 float X_PID_X_value(float measure, float calcu);
 float Y_PID_V_value(float measure, float calcu);
 float Y_PID_X_value(float measure, float calcu);
-float PID_turn_value(float measure, float calcu);
 
+float PID_turn_value(float measure, float calcu);
+float PID_straight_value(float measure, float calcu);
+ 
 void LocationPID_change(int pid, float kp, float ki, float kd);
 
 

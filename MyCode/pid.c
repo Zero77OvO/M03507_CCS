@@ -23,6 +23,10 @@ float Kp_turn=0.0;
 float Ki_turn=0.0;
 float Kd_turn=0.0; 
 
+float Kp_straight=0.0;  
+float Ki_straight=0.0;
+float Kd_straight=0.0; 
+
 float err_x_v;     
 float last_err_x_v ;
 float err_sum_x_v ;
@@ -51,6 +55,11 @@ float last_err_turn ;
 float err_sum_turn ;
 float err_difference_turn;
 
+float err_straight ;     
+float last_err_straight ;
+float err_sum_straight ;
+float err_difference_straight;
+
 
 float X_v_out;    
 float X_x_out;   
@@ -60,7 +69,7 @@ float Y_x_out;
 
 
 float Turn_out;  
-
+float straight_out;  
 
 
 float X_PID_V_value(float measure, float calcu)   
@@ -166,12 +175,37 @@ float PID_turn_value(float measure, float calcu)
 }
 
 
+
+
+float PID_straight_value(float measure, float calcu)  
+{
+    err_straight = measure - calcu;
+    err_sum_straight += err_straight;
+    // xianfu
+     if(err_sum_straight > 5)
+		err_sum_straight= 5;
+	  else if(err_sum_straight < -5)
+		err_sum_straight = -5;
+		
+		
+    err_difference_straight = err_straight - last_err_straight;
+    straight_out = Kp_straight * err_straight + Kd_straight * (err_straight - last_err_straight)+ Ki_straight*err_sum_straight;;
+    last_err_straight = err_straight;
+		
+	// if(Turn_out<-500){Turn_out=-500;}
+	// if(Turn_out>500){Turn_out=500;}
+	//HAL_Delay(10);
+    return straight_out;
+}
+
+
 void LocationPID_change(int pid, float kp, float ki, float kd) {
   if(pid==1){Kp_x_x=kp;  Ki_x_x=ki;  Kd_x_x=kd;}
   if(pid==2){Kp_y_x=kp;  Ki_y_x=ki;  Kd_y_x=kd;}
   if(pid==3){Kp_x_v=kp;  Ki_x_v=ki;  Kd_x_v=kd;}
   if(pid==4){Kp_y_v=kp;  Ki_y_v=ki;  Kd_y_v=kd;}
   if(pid==5){Kp_turn=kp; Ki_turn=ki; Kd_turn=kd;}
+  if(pid==6){Kp_straight=kp;Ki_straight=ki;Kd_straight=kd;}
 
 }
 

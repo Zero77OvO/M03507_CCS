@@ -48,7 +48,8 @@ int main(void)
     Timer_A1_init();
     Timer_A2_init();
 
-    uart3_init();
+    uart0_init();
+    
     EXTI_Init();
     uint8_t ret = 1;
           
@@ -74,8 +75,8 @@ int main(void)
         // }
         // Delay_ms(20);
 
-        OLED_ShowNum(0, 0, speed_now_LF, 6,16, 0);OLED_ShowNum(50, 0, speed_now_rt, 3,16, 0);                                                    
-        OLED_ShowNum(0, 2, speed_out_LF, 6,16, 0);OLED_ShowNum(50, 2, speed_out_rt, 3,16, 0);
+        OLED_ShowNum(0, 0, theta, 2,16, 0);OLED_ShowNum(50, 0, high_rho, 3,16, 0);                                                    
+        OLED_ShowNum(0, 2, speed_out_LF, 6,16, 0);OLED_ShowNum(50, 2, low_rho, 3,16, 0);
         OLED_ShowNum(0, 4, encoder1_num, 6,16, 0);
         OLED_ShowNum(0, 6, encoder2_num, 6,16, 0);
         if(yaw>=0){OLED_ShowNum(80, 0, yaw, 6,16, 0);}

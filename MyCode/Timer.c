@@ -29,6 +29,8 @@ float KP_R=12.0;float KI_R=0.002;float KD_R=0; //速度环PI参数
 int location_L;//位置环输出
 int location_R;
 
+int stright_pid_out=0; //巡线
+
 IncrementalPID LF;
 IncrementalPID RT;
 
@@ -78,12 +80,16 @@ void TIMA1_IRQHandler(void)
         LocationPID_change(2,0.3,0.04,0.005);
         location_L=X_PID_X_value(12000,motor.speed_L); 
         location_R=Y_PID_X_value(12000,motor.speed_R); 
+
+
         }
 
 
 
         location_flag_t=0;
         }
+        LocationPID_change(6,0.3,0.04,0.005);
+        stright_pid_out=PID_straight_value(90, theta);
 
 	}
 

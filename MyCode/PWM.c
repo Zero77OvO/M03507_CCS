@@ -46,7 +46,7 @@ void Servo_reset(){
     delay_ms(50);
     Reset_move();
     if(state==1){
-        state=2;//×´Ì¬ÇÐ»»}
+        state=2;//×´Ì¬ÇÐ»»
     }
 
  }
